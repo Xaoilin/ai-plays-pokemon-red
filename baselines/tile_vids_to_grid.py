@@ -81,14 +81,15 @@ if __name__ == "__main__":
     inner_mosaic = False
     if inner_mosaic:
         outer_dir = Path(sys.argv[1])
-        all_sessions = list(outer_dir.glob("session_*"))
+        print(f"outer_dir {outer_dir}")
+        all_sessions = list(outer_dir.glob("ssj_*"))
         scripts = [make_script(sess) for sess in all_sessions]
         for script, sess in zip(scripts, all_sessions):
-            out_file = Path(outer_dir / Path("parallel_scripts") / sess.with_suffix('.sh').name)
+            out_file = Path(outer_dir / Path("grid_renders/parallel_scripts") / sess.with_suffix('.sh').name)
             write_file(out_file, script)
     else:
         base = Path('grid_renders')
-        all_input_vids = list(base.glob("session_*/session_*.mp4"))
+        all_input_vids = list(base.glob("ssj_*/session_*.mp4"))
         print(len(all_input_vids))
         output_dir = base / "outer_mosaic"
         script = make_outer_script(output_dir / "big_boi.mp4", all_input_vids)

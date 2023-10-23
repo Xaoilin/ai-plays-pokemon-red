@@ -105,7 +105,7 @@ class RedGymEnv(gym.Env):
 
         self.screen = self.pyboy.botsupport_manager().screen()
 
-        self.pyboy.set_emulation_speed(0 if config['headless'] else 6)
+        self.pyboy.set_emulation_speed(0)
         self.reset()
 
     def reset(self, *, seed=None, options=None):
